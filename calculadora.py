@@ -2,45 +2,45 @@
 import sys
 
 
-def f_sum(num1, num2):
-
-    print("Suma =", float(num1) + float(num2))
-
-
-def f_rest(num1, num2):
-    print("Resta =", float(num1) - float(num2))
+def suma(num1, num2):
+    return num1+num2
 
 
-def f_multi(num1, num2):
-    print("Multiplicacion =", float(num1) * float(num2))
+def resta(num1, num2):
+    return num1-num2
 
 
-def f_div(num1, num2):
+def multiplica(num1, num2):
+    return num1*num2
+
+
+def divide(num1, num2):
     try:
-        print("la division es:", float(num1) / float(num2))
-
+        return num1/num2
     except ZeroDivisionError:
-        print("Error try to divided per zero")
+        return "Error: trying to divided by zero"
 
 
-try:
+operaciones= {"suma": suma, "resta": resta, "multiplicacion": multiplica, "division": divide}
 
-    if sys.argv[2] == '+':
-        f_sum(sys.argv[1], sys.argv[3])
+if __name__ == "__main__":
 
-    elif sys.argv[2] == '-':
-        f_rest(sys.argv[1], sys.argv[3])
+    if len(sys.argv) != 4:
+        sys.exit("Bad number of arguments")
 
-    elif sys.argv[2] == 'x' or sys.argv[2] == '*':
-        f_multi(sys.argv[1], sys.argv[3])
+    try:
+        operando = sys.argv[1]
+        number1 = float(sys.argv[2])
+        number2 = float(sys.argv[3])
 
-    elif sys.argv[2] == '/' or sys.argv[2] == '//':
-        f_div(sys.argv[1], sys.argv[3])
+    except IndexError:
+        sys.exit("Usage: operator number1 number2")
+    except ValueError:
+        sys.exit("num1 & num2 must be integer")
 
-    else:
-        raise ValueError("Fatal Error")
+    try:
+        result = operaciones[operando](number1, number2)
+    except KeyError:
+        sys.exit("The operator does not exist")
 
-except ValueError:
-    print("could not convert string to float:", sys.argv[1], sys.argv[2], sys.argv[3])
-except OverflowError as err2:
-    print(err2, "OverflowError")
+    print(result)
