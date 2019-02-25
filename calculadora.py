@@ -21,7 +21,7 @@ def divide(num1, num2):
         return "Error: trying to divided by zero"
 
 
-operaciones= {"suma": suma, "resta": resta, "multiplicacion": multiplica, "division": divide}
+operaciones= {"suma": suma, "resta": resta, "multiplica": multiplica, "divide": divide}
 
 if __name__ == "__main__":
 

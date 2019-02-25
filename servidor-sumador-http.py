@@ -27,10 +27,19 @@ try:
         resource = request.split()[1]
         print(resource)
 
+        _, op1, operando, op2 = resource.split('/')
+
+        number1 = int(op1)
+        number2 = int(op2)
+
+        html_response = calculadora.operaciones[operando](number1, number2)
+
+        recvSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n" +
+                              '<html><h1>Sumador Simple</h1>' +
+                              str(html_response) +
+                              '\r\n', 'utf-8'))
         recvSocket.close()
+
 except KeyboardInterrupt:
     print('Closing binding sockets')
     mySocket.close()
-
-
-
