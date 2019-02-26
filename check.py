@@ -26,6 +26,7 @@ repo_files = [
     'check.py',
     'README.md',
     '.gitignore',
+    'calculadora.py',
     '.git'
     ]
 
